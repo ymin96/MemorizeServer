@@ -1,5 +1,6 @@
 package com.ymin.memorize.service;
 
+import com.ymin.memorize.dto.Caption;
 import com.ymin.memorize.dto.Movie;
 import com.ymin.memorize.mapper.CaptionMapper;
 import com.ymin.memorize.mapper.MovieMapper;
@@ -21,7 +22,7 @@ public class MovieService {
     MovieMapper movieMapper;
 
     @Autowired
-    CaptionService captionService;
+    CaptionMapper captionMapper;
 
     public List<Movie> findMovieByTitle(String title){
         ArrayList<Movie> movieArrayList = new ArrayList<>();
@@ -30,9 +31,36 @@ public class MovieService {
 
         for (Movie movie : movieArrayList) {
             int movie_id = movie.getId();
-            movie.setCaptionList(captionService.getCaptionListByMovieId(movie_id));
+            movie.setCaptionList(captionMapper.getCaptionListByMovieId(movie_id));
         }
 
         return movieArrayList;
+    }
+
+    public Movie getMovieByMovieId(int id){
+        return movieMapper.getMovieByMovieId(id);
+    }
+
+    public List<Caption> getCaptionListByMovieId(int movie_id){
+        return captionMapper.getCaptionListByMovieId(movie_id);
+    }
+
+    public List<Movie> getCaptionListByWord(String word){
+        ArrayList<Caption> captionList = (ArrayList<Caption>) captionMapper.getCaptionListByWord(word);
+        ArrayList<Movie> movieList = new ArrayList<>();
+
+        for(Caption caption : captionList){
+            Movie movie = movieMapper.getMovieByMovieId(caption.getMovie_id());
+            if(movieList.contains(movie)){
+                int index = movieList.indexOf(movie);
+                movieList.get(index).getCaptionList().add(caption);
+            }
+            else{
+                movie.getCaptionList().add(caption);
+                movieList.add(movie);
+            }
+        }
+
+        return movieList;
     }
 }

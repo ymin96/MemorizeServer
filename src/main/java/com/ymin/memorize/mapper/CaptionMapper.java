@@ -14,4 +14,7 @@ public interface CaptionMapper {
 
     @Select("SELECT * FROM caption WHERE movie_id = #{id}")
     List<Caption> getCaptionListByMovieId(@Param("id") int movie_id);
+
+    @Select("SELECT * FROM caption WHERE caption LIKE CONCAT('%',#{word},'%')")
+    List<Caption> getCaptionListByWord(@Param("word") String word);
 }

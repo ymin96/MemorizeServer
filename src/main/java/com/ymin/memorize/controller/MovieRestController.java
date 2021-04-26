@@ -1,7 +1,6 @@
 package com.ymin.memorize.controller;
 
 import com.ymin.memorize.dto.Movie;
-import com.ymin.memorize.service.CaptionService;
 import com.ymin.memorize.service.MovieService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -17,13 +16,14 @@ public class MovieRestController {
 
     @Autowired
     MovieService movieService;
-    @Autowired
-    CaptionService captionService;
 
     @RequestMapping(value = "/title/{title}", method = RequestMethod.GET)
     List<Movie> getMovieByTitle(@PathVariable String title){
         return movieService.findMovieByTitle(title);
     }
 
-
+    @RequestMapping(value = "/caption/{word}", method = RequestMethod.GET)
+    List<Movie> getMovieByCaption(@PathVariable String word){
+        return movieService.getCaptionListByWord(word);
+    }
 }

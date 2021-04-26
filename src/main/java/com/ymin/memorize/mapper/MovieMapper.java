@@ -18,5 +18,8 @@ public interface MovieMapper {
     @Select("SELECT * FROM movie WHERE e_title LIKE CONCAT('%',#{title},'%')")
     List<Movie> findMovieByE_title(@Param("title") String title);
 
+    @Select("SELECT * FROM movie WHERE id = #{id}")
+    Movie getMovieByMovieId(@Param("id") int id);
+
 
 }
