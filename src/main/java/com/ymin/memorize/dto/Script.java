@@ -5,7 +5,7 @@ import lombok.Setter;
 
 @Getter
 @Setter
-public class Caption {
+public class Script {
     private int id;
     private int movie_id;
     private int start_second;

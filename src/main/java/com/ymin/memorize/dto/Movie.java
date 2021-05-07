@@ -13,10 +13,10 @@ public class Movie {
     private int id;
     private String k_title;
     private String e_title;
-    private List<Caption> captionList;
+    private List<Script> scriptList;
 
     public Movie(){
-        captionList = new ArrayList<>();
+        scriptList = new ArrayList<>();
     }
 
     public boolean equals(Object o){
