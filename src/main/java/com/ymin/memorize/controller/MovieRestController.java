@@ -17,27 +17,30 @@ public class MovieRestController {
 
     // 영화 제목 으로 검색 후 리턴
     @RequestMapping(value = "/title/{title}", method = RequestMethod.GET)
-    List<Movie> getMovieByTitle(@PathVariable String title){
+    List<Movie> getMovieByTitle(@PathVariable String title) {
         return movieService.findMovieByTitle(title);
     }
 
     //자막 내용 으로 검색 후 리턴
     @RequestMapping(value = "/caption/{word}", method = RequestMethod.GET)
-    List<Movie> getMovieByCaption(@PathVariable String word){
+    List<Movie> getMovieByCaption(@PathVariable String word) {
         return movieService.getScriptListByWord(word);
     }
 
     @RequestMapping(value = "/movies", method = RequestMethod.GET)
-    Map<String, Object> getMovies(@RequestParam(value = "title", required = false) String title, @RequestParam("limit") int limit, @RequestParam("offset") int offset){
-        Map<String, Object> response_json= new HashMap<>();
+    Map<String, Object> getMovies(@RequestParam(value = "title", required = false) String title, @RequestParam(value = "limit", defaultValue = "16") int limit, @RequestParam("offset") int offset) {
+        Map<String, Object> response_json = new HashMap<>();
 
         int movie_count = movieService.getMovieCount(title);
-        int page_limit = (int)Math.ceil((double)movie_count / limit);
-        List<Movie> movie_list = movieService.getMovieList(title,limit,--offset);
+        int last_page = (int) Math.ceil((double) movie_count / limit);
 
-        response_json.put("cur_page", ++offset);
+        offset = (offset < 0) ? 0 : (offset > last_page)? last_page - 1 : offset - 1;
+
+        List<Movie> movie_list = movieService.getMovieList(title, limit, offset);
+
+        response_json.put("cur_page", offset);
         response_json.put("movie_list", movie_list);
-        response_json.put("last_page", page_limit);
+        response_json.put("last_page", last_page);
         return response_json;
     }
 }

@@ -85,5 +85,11 @@ public class MovieService {
         return word == null? scriptMapper.getScriptListPage(movie_id, limit, offset) : scriptMapper.getScriptListPageByWord(movie_id, word, limit, offset);
     }
 
+    public int getScriptCount(int movie_id, String word){
+        return word == null ? scriptMapper.getScriptCount(movie_id) : scriptMapper.getScriptCountByWord(movie_id, word);
+    }
 
+    public Script getScriptById(int id){
+        return scriptMapper.getScriptById(id);
+    }
 }

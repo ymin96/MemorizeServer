@@ -11,4 +11,5 @@ public class Script {
     private int start_second;
     private int end_second;
     private String caption;
+    private String thumbnail;
 }
