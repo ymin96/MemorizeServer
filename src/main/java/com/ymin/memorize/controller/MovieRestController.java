@@ -28,7 +28,10 @@ public class MovieRestController {
     }
 
     @RequestMapping(value = "/movies", method = RequestMethod.GET)
-    Map<String, Object> getMovies(@RequestParam(value = "title", required = false) String title, @RequestParam(value = "limit", defaultValue = "16") int limit, @RequestParam("offset") int offset) {
+    Map<String, Object> getMovies(
+            @RequestParam(value = "title", required = false) String title,
+            @RequestParam(value = "limit", defaultValue = "16") int limit,
+            @RequestParam(value = "offset" , defaultValue = "1") int offset) {
         Map<String, Object> response_json = new HashMap<>();
 
         int movie_count = movieService.getMovieCount(title);

@@ -28,7 +28,7 @@ public class ScriptRestController {
 
     @RequestMapping(value = "/scripts/{movie_id}", method = RequestMethod.GET)
     Map<String, Object> getScripts(
-            @PathVariable("movie_id") int movie_id,
+            @PathVariable int movie_id,
             @RequestParam(value = "limit", defaultValue = "16") int limit,
             @RequestParam(value = "offset", defaultValue = "1") int offset,
             @RequestParam(value = "word", required = false) String word) {
@@ -47,7 +47,7 @@ public class ScriptRestController {
         return response_json;
     }
 
-    @GetMapping(value = "script/thumbnail/{id}", produces = MediaType.IMAGE_JPEG_VALUE)
+    @GetMapping(value = "/script/thumbnail/{id}", produces = MediaType.IMAGE_JPEG_VALUE)
     public ResponseEntity<byte[]> thumbnailSearch(@PathVariable("id")int script_id) throws IOException{
         Script script = movieService.getScriptById(script_id);
         InputStream imageStream = new FileInputStream(path + script.getThumbnail());
