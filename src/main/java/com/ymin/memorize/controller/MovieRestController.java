@@ -38,7 +38,7 @@ public class MovieRestController {
         int last_page = (int) Math.ceil((double) movie_count / limit);
 
         offset = (offset < 0) ? 0 : (offset > last_page)? last_page - 1 : offset - 1;
-
+        offset *= limit;
         List<Movie> movie_list = movieService.getMovieList(title, limit, offset);
 
         response_json.put("cur_page", offset);

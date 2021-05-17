@@ -38,7 +38,7 @@ public class ScriptRestController {
         int last_page =(int)Math.ceil((double) script_count/ limit);
 
         offset = (offset < 0) ? 0 : (offset > last_page)? last_page - 1 : offset - 1;
-
+        offset *= limit;
         List<Script> script_list = movieService.getScriptList( movie_id, word, limit, offset);
 
         response_json.put("cur_page", offset + 1);

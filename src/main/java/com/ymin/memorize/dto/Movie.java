@@ -13,6 +13,7 @@ public class Movie {
     private int id;
     private String k_title;
     private String e_title;
+    private String thumbnail;
     private List<Script> scriptList;
 
     public Movie(){
