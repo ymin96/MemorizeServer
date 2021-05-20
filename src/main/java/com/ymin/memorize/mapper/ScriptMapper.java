@@ -30,7 +30,7 @@ public interface ScriptMapper {
 
     @Select("SELECT * " +
             "FROM caption " +
-            "WHERE movie_id = #{id} AND caption LIKE CONCAT('%',#{word},'%')" +
+            "WHERE movie_id = #{id} AND caption LIKE CONCAT('%',#{word},'%') " +
             "LIMIT #{limit} OFFSET #{offset}")
     List<Script> getScriptListPageByWord(@Param("id") int movie_id,@Param("word")String word, @Param("limit") int limit,@Param("offset") int offset);
 
