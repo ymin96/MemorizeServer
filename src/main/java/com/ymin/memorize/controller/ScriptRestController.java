@@ -106,7 +106,7 @@ public class ScriptRestController {
             //mime type 지정
             response.setContentType("video/webm");
             //전송 내용을 헤드에 넣어준다. 마지막에 파일 전체 크기를 넣는다.
-            response.setHeader("Content-Range", "bytes " + range_start + "-" + range_end + "/" + range_end);
+            response.setHeader("Content-Range", "bytes " + range_start + "-" + range_end + "/" + movie_size);
             response.setHeader("Accept-Ranges", "bytes");
             response.setHeader("Content-Length", "" + part_size);
             OutputStream out = response.getOutputStream();
