@@ -14,6 +14,7 @@ public class Movie {
     private String k_title;
     private String e_title;
     private String thumbnail;
+    private String filepath;
     private List<Script> scriptList;
 
     public Movie(){
